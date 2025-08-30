@@ -1,2 +1,3 @@
 #export PYTHONPATH="${PYTHONPATH}:/MapBEVPrediction/StreamMapNet_modified"
-CUDA_VISIBLE_DEVICES=0 python tools/train.py plugin/configs/nusc_newsplit_480_60x30_24e_AID4AD_only.py --no-validate --deterministic --work_dir work_dirs/nusc_newsplit_480_60x30_24e_AID4AD_only
+CUDA_VISIBLE_DEVICES=0 python tools/train.py plugin/configs/nusc_newsplit_480_60x30_24e_AID4AD_only.py \
+    --no-validate --deterministic --work-dir work_dirs/nusc_newsplit_480_60x30_24e_AID4AD_only

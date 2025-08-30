@@ -3,7 +3,9 @@
   
   <h3> AID4AD: Aerial Image Data for Automated Driving Perception </h3>
   
-  [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2508.02140)
+  <a href="https://arxiv.org/pdf/2508.02140"><img src="https://img.shields.io/badge/arXiv-Paper-brightgreen.svg" alt="arXiv Paper"></a>
+  <a href="https://huggingface.co/datasets/dlengerer/AID4AD/tree/main"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-HuggingFace-blue.svg" alt="Hugging Face Dataset"></a>
+
 </div>
 
 ## Introduction
@@ -17,17 +19,17 @@ AID4AD introduces a high-precision dataset and experimental pipeline for evaluat
 
 ## 📈 Results
 
-The following pre-trained models are available to reproduce the main results from the paper:
+The following pre-trained checkpoints are included in the [data repository](https://huggingface.co/datasets/dlengerer/AID4AD/tree/main) to reproduce the main results from the paper:
 
-- SatforHDMap (Map Construction) (TBD)
-- StreamMapNet (Map Construction) (TBD)
-- HiVT (Motion Prediction) (TBD)
+- SatforHDMap (Map Construction)
+- StreamMapNet (Map Construction)
+- HiVT (Motion Prediction)
 
 ---
 
 ## 📦 Dataset
 
-1. Download the dataset archive AID4AD_tiles.zip (TBD) and extract the `SatImgTiles/`, `offset_grid_data/` and `annotation_files/` folders into  
+1. Download the dataset archive [AID4AD_tools.zip](https://huggingface.co/datasets/dlengerer/AID4AD/resolve/main/AID4AD_tools.zip?download=true) from the [data repository](https://huggingface.co/datasets/dlengerer/AID4AD/tree/main) and extract the `SatImgTiles/`, `offset_grid_data/` and `annotation_files/` folders into  
    [`AID4AD_tools/`](AID4AD_tools).
 2. Generate the full-area images:
    ```bash
@@ -50,6 +52,7 @@ AID4AD/
 ├── nuScenes                     
 ├── AID4AD_tools
 │   ├── annotation_files/    
+│   ├── offset_grid_data/ 
 │   └── SatImgTiles/               
 ├── MapBEVPrediction_modified/
 │   ├── HiVT/
@@ -93,7 +96,7 @@ AID4AD/
 
 ## 🔮 HiVT (Motion Prediction)
 
-You can either generate or download pre-computed BEV features from here (TBD).
+You can either generate or download pre-computed BEV features from the [data repository](https://huggingface.co/datasets/dlengerer/AID4AD/tree/main).
 
 ### Option A: Download prepared data
 
@@ -137,14 +140,14 @@ You can either generate or download pre-computed BEV features from here (TBD).
 If you use AID4AD in your research, please cite:
 
 ```bibtex
-@misc{lengerer2025aid4adaerialimagedata,
-      title={AID4AD: Aerial Image Data for Automated Driving Perception}, 
-      author={Daniel Lengerer and Mathias Pechinger and Klaus Bogenberger and Carsten Markgraf},
-      year={2025},
-      eprint={2508.02140},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2508.02140}, 
+@misc{Lengerer_AID4AD_2025,
+   author    = {Lengerer, Daniel and Pechinger, Mathias and Bogenberger, Klaus and Markgraf, Carsten},
+   title     = {AID4AD: Aerial Image Data for Automated Driving Perception},
+   year={2025},
+   eprint={XXX},
+   archivePrefix={arXiv},
+   primaryClass={cs.LG},
+   url={https://arxiv.org/abs/XXX}, 
 }
 ```
 

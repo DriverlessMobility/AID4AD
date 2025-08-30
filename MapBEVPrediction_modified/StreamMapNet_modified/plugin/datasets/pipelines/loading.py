@@ -94,11 +94,11 @@ class LoadAerialImageFromFile(object):
                 - img_norm_cfg (dict): Normalization configuration of images.
         """
         filename = results['aerial_image_path']
-        img = [mmcv.imread(filename, self.color_type)]
-        img = [im.transpose(2, 0, 1) for im in img]
+        img = mmcv.imread(filename, self.color_type)
+        #img = [im.transpose(2, 0, 1) for im in img]
 
         if self.to_float32:
-            img = [i.astype(np.float32) for i in img]
+            img = img.astype(np.float32)
         results['aerial_img'] = img
         results['aerial_img_shape'] = [i.shape for i in img]
         results['aerial_ori_shape'] = [i.shape for i in img]

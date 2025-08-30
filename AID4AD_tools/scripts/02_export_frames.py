@@ -12,7 +12,6 @@ from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from nuscenes.eval.common.utils import Quaternion
-from helpers.geostuff import calc_new_latlon_w_offset
 from helpers.offset_grid_helpers import load_offset_grids, get_offset_for_coordinate
 
 Image.MAX_IMAGE_PIXELS = None
@@ -298,6 +297,8 @@ def main():
     if args.offset_grid_dir and os.path.isdir(args.offset_grid_dir):
         offset_grids = load_offset_grids(basemap_names, args.offset_grid_dir)
         logging.info(f"Loaded offset grids from: {args.offset_grid_dir}")
+    if offset_grids is None:
+        raise ValueError("No offset grids provided")
 
     generator = SatImageGenerator(args, basemap_names, satmap_origins, offset_grids)
     generator.run()

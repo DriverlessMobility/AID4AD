@@ -4,6 +4,7 @@ import os
 import os.path as osp
 import torch
 import warnings
+import time
 from mmcv import Config, DictAction
 from mmcv.cnn import fuse_conv_bn
 from mmcv.parallel import MMDataParallel, MMDistributedDataParallel
@@ -17,6 +18,7 @@ from mmdet3d.models import build_model
 from mmdet_train import set_random_seed
 from mmdet.datasets import replace_ImageToTensor
 from IPython import embed
+from mmdet3d.utils import get_root_logger
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -239,6 +241,12 @@ def main():
         outputs = multi_gpu_test(model, data_loader, args.tmpdir,
                                 args.gpu_collect)
 
+    logger = None
+    if True:
+        timestamp = time.strftime('%Y%m%d_%H%M%S', time.localtime())
+        log_file = args.checkpoint.replace('.pth', f'_{timestamp}_eval_metrics.txt')
+        logger = get_root_logger(
+            log_file=log_file, log_level=cfg.log_level, name='mmdet')
 
     rank, _ = get_dist_info()
     if rank == 0:
@@ -254,8 +262,7 @@ def main():
             ]:
                 eval_kwargs.pop(key, None)
             print('start evaluation!')
-            print(dataset.evaluate(outputs, **eval_kwargs))
-
+            result = dataset.evaluate(outputs, logger=logger, **eval_kwargs)
 
 if __name__ == '__main__':
     main()

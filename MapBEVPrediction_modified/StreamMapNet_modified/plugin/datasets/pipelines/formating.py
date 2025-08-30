@@ -55,6 +55,16 @@ class FormatBundleMap(object):
                 img = np.ascontiguousarray(results['img'].transpose(2, 0, 1))
                 results['img'] = DC(to_tensor(img), stack=True)
         
+        if 'aerial_img' in results and self.process_img:
+            if isinstance(results['aerial_img'], list):
+                # process multiple imgs in single frame
+                imgs = [img.transpose(2, 0, 1) for img in results['aerial_img']]
+                imgs = np.ascontiguousarray(np.stack(imgs, axis=0))
+                results['aerial_img'] = DC(to_tensor(imgs), stack=True)
+            else:
+                img = np.ascontiguousarray(results['aerial_img'].transpose(2, 0, 1))
+                results['aerial_img'] = DC(to_tensor(img), stack=True)
+        
         if 'semantic_mask' in results:
             results['semantic_mask'] = DC(to_tensor(results['semantic_mask']), stack=True)
 

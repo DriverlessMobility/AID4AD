@@ -190,12 +190,12 @@ class StreamMapNet(BaseMapper):
         _bev_feats = self.backbone(img, img_metas=img_metas, points=points)
 
         if self.use_AID4AD:
-            _aid_feats = self.aid_encoder(aerial_img[0])                                    # [1, 64, 200, 400]
-            _aid_feats = self.aid_downsampler(_aid_feats)                                   # [1, 256, 100, 200]
+            _aid_feats = self.aid_encoder(aerial_img)                                       # [bs, 64, 200, 400]
+            _aid_feats = self.aid_downsampler(_aid_feats)                                   # [bs, 256, 50, 100]
             if self.AID4AD_only:
                 _bev_feats = _aid_feats
             else:
-                _bev_feats = self.aid_fuser(torch.cat([_bev_feats, _aid_feats], dim=1))          # [1, 256, 100, 200]
+                _bev_feats = self.aid_fuser(torch.cat([_bev_feats, _aid_feats], dim=1))          # [bs, 256, 50, 100]
         
         if self.streaming_bev:
             self.bev_memory.train()
@@ -238,12 +238,12 @@ class StreamMapNet(BaseMapper):
         _bev_feats = self.backbone(img, img_metas, points=points)
 
         if self.use_AID4AD:
-            _aid_feats = self.aid_encoder(aerial_img[0])                                    # [1, 64, 200, 400]
-            _aid_feats = self.aid_downsampler(_aid_feats)                                   # [1, 256, 100, 200]
+            _aid_feats = self.aid_encoder(aerial_img)                                    # [bs, 64, 200, 400]
+            _aid_feats = self.aid_downsampler(_aid_feats)                                   # [bs, 256, 50, 100]
             if self.AID4AD_only:
                 _bev_feats = _aid_feats
             else:
-                _bev_feats = self.aid_fuser(torch.cat([_bev_feats, _aid_feats], dim=1))          # [1, 256, 100, 200]
+                _bev_feats = self.aid_fuser(torch.cat([_bev_feats, _aid_feats], dim=1))          # [bs, 256, 50, 100]
 
         img_shape = [_bev_feats.shape[2:] for i in range(_bev_feats.shape[0])]
 
