@@ -141,13 +141,13 @@ If you use AID4AD in your research, please cite:
 
 ```bibtex
 @misc{Lengerer_AID4AD_2025,
-   author    = {Lengerer, Daniel and Pechinger, Mathias and Bogenberger, Klaus and Markgraf, Carsten},
-   title     = {AID4AD: Aerial Image Data for Automated Driving Perception},
-   year={2025},
-   eprint={XXX},
-   archivePrefix={arXiv},
-   primaryClass={cs.LG},
-   url={https://arxiv.org/abs/XXX}, 
+      title={AID4AD: Aerial Image Data for Automated Driving Perception}, 
+      author={Daniel Lengerer and Mathias Pechinger and Klaus Bogenberger and Carsten Markgraf},
+      year={2025},
+      eprint={2508.02140},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2508.02140}, 
 }
 ```
 
