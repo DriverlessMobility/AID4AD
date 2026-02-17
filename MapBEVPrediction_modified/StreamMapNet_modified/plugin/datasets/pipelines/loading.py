@@ -100,12 +100,12 @@ class LoadAerialImageFromFile(object):
         if self.to_float32:
             img = img.astype(np.float32)
         results['aerial_img'] = img
-        results['aerial_img_shape'] = [i.shape for i in img]
-        results['aerial_ori_shape'] = [i.shape for i in img]
+        results['aerial_img_shape'] = img.shape
+        results['aerial_ori_shape'] = img.shape
         # Set initial values for default meta_keys
-        results['aerial_pad_shape'] = [i.shape for i in img]
+        results['aerial_pad_shape'] = img.shape
         # results['scale_factor'] = 1.0
-        num_channels = 1 if len(img[0].shape) < 3 else img[0].shape[2]
+        num_channels = 1 if img.ndim < 3 else img.shape[2]
         results['aerial_img_norm_cfg'] = dict(
             mean=np.zeros(num_channels, dtype=np.float32),
             std=np.ones(num_channels, dtype=np.float32),

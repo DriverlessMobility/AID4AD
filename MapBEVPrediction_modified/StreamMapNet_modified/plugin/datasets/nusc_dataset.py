@@ -36,7 +36,11 @@ class NuscDataset(BaseMapDataset):
             aer_fpaths = glob(aerial_data_root + '/*/*.png')
 
             for aer_fpath in aer_fpaths:
-                sample_token = aer_fpath.split('/')[-1].split('.')[0].split('_')[-1]
+                fname = os.path.basename(aer_fpath)
+                if "_map_overlay" in fname or "_basemap" in fname:
+                    continue
+
+                sample_token = fname.split('.')[0].split('_')[-1]
                 self.sample_token2aerial_fpath[sample_token] = aer_fpath
     
     def load_annotations(self, ann_file):

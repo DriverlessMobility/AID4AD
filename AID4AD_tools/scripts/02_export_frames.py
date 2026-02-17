@@ -46,7 +46,8 @@ class SatImageGenerator:
             basemap_path = Path(self.args.basemap_path) / f"{basemap}.png"
             satmap_path  = Path(self.args.satmap_path) / basemap / "stitched_new.png"
 
-            self.basemap_images[basemap] = self._load_image(basemap_path)
+            if self.args.crop_basemap and os.path.exists(basemap_path):
+                self.basemap_images[basemap] = self._load_image(basemap_path)
             self.satmap_images[basemap]  = self._load_image(satmap_path)
 
     def run(self):
