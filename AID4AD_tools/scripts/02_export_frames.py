@@ -80,7 +80,7 @@ class SatImageGenerator:
     def _process_frame(self, annotations, frame_idx):
         frame = annotations[frame_idx]
         map_name = frame["map_location"]
-        if map_name not in self.basemap_images:
+        if map_name not in self.satmap_images:
             return
 
         translation, rotation = self._calc_lidar_to_basemap_offset(frame, ref_frame=self.args.reference_frame)
