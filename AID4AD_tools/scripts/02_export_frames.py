@@ -37,6 +37,11 @@ class SatImageGenerator:
         self.half_h_m = self.args.crop_size_meters[1] / 2.0
         self._valid_final_pixels = self.args.final_image_size_pixels
 
+        self.rotation_resample = {
+            "nearest": Image.NEAREST,
+            "bilinear": Image.BILINEAR,
+        }[self.args.rotation_resample]
+
         self.basemap_images = {}
         self.satmap_images = {}
         self.frame_counter_per_map = {basemap: 0 for basemap in basemap_names}
@@ -156,7 +161,7 @@ class SatImageGenerator:
         pivot_sub_x = pivot_x_px - left
         pivot_sub_y = pivot_y_px - top
 
-        rot_img = sub_img.rotate(-heading_deg, center=(pivot_sub_x, pivot_sub_y), expand=False)
+        rot_img = sub_img.rotate(-heading_deg, center=(pivot_sub_x, pivot_sub_y), expand=False, resample=self.rotation_resample)
 
         final_crop = rot_img.crop((
             pivot_sub_x - half_w_px,
@@ -270,6 +275,8 @@ def get_args():
     parser.add_argument("--img_scaling", type=float, default=0.15)
     parser.add_argument("--offset_grid_dir", type=str, default=None)
     parser.add_argument("--reference_frame", type=str, default="lidar", choices=["lidar", "ego"])
+    parser.add_argument("--rotation-resample", dest="rotation_resample", type=str, default="nearest",
+                        choices=["nearest", "bilinear"])
     parser.add_argument("--crop_basemap", action="store_true")
     parser.add_argument("--create_map_overlay", action="store_true")
     parser.add_argument("--dry_run", action="store_true")
